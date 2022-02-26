@@ -9,8 +9,9 @@ import os
 Pause = False
 Num=0
 win = Tk()
-path="C://Users//tirth//source//repos//Music_Player//music"
-dir_list=os.listdir()
+path="C://Users//tirtha//source//repos//Music_Player//music"    
+dir_list=os.listdir()                                        #  You can add path in listdir("") to specify any other specific folder without pasting
+                                                             #  the program in same folder with the music files
 song_list=[]
 count=len(dir_list)
 for i in range(count):
