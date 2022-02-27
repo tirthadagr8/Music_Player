@@ -12,11 +12,12 @@ change=False
 wait=False
 Length=1
 slider_pointer=1
+volume_pointer=0
 Pause = False
 Num=0
 win = Tk()
-path="C://Users//tirth//source//repos//Music_Player//music"         #  You can add path in listdir("") to specify any other specific folder without pasting
-                                                                    #  the program in same folder with the music files
+path="C://Users//tirth//source//repos//Music_Player//music"        #  You can add path in listdir("") to specify any other specific folder without pasting
+                                                                   #  the program in same folder with the music files
 dir_list=os.listdir()
 song_list=[]
 count=len(dir_list)
@@ -43,12 +44,22 @@ def slide(x):
     pygame.mixer.music.set_pos(slider_pointer)
     #time.sleep(0.09)
     
-    my_slider.config(value=slider_pointer)
+    #my_slider.config(value=slider_pointer)
     pygame.mixer.music.unpause()
    
     wait=False
 
     #time.sleep(0.05)
+
+
+def volume(y):
+    global volume_pointer
+    volume_pointer=volume_slider.get()
+    volume_pointer=100-volume_pointer
+    volume_label.config(text=int(volume_pointer))
+    pygame.mixer.music.set_volume(volume_pointer/100.0)
+    
+
 
 def Tracker():
         #Tracker()
@@ -79,7 +90,7 @@ def Tracker():
             #present=round(present)
             # slider_label.config(text=present)
             time.sleep(0.095)  
-            #os.system('CLS')
+            os.system('CLS')
         print('EXIT')
 
 
@@ -201,8 +212,11 @@ my_slider.grid(row=9,column=1,padx=20,pady=20)
 slider_label=Label(win,text='0')
 slider_label.grid(row= 11, column=1)
 
-volume_slider=ttk.Scale(win,from_=0,to=100,value=0,orient=VERTICAL,length=200)
+volume_slider=ttk.Scale(win,from_=0,to=100,value=0,orient=VERTICAL,length=200,command=volume)
 volume_slider.grid(row=2,column=3,padx=90,pady=20)
+
+volume_label=Label(win,text='100')
+volume_label.grid(row=4,column=3,pady=20)
 #Entry(win,width=50,borderwidth=5).grid(row=5,column=1)
 ################################################################
 print(dir_list)
